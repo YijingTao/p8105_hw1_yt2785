@@ -33,3 +33,26 @@ as.numeric(character_vector)
 as.numeric(factor_vector)
 ```
 
+
+
+Problem 2
+
+```{r}
+library(palmerpenguins)
+library(ggplot2)
+```
+
+
+```{r}
+data("penguins", package = "palmerpenguins")
+summary(penguins)
+nrow(penguins)
+ncol(penguins)
+colnames(penguins)
+a = pull(penguins, var = flipper_length_mm)
+b = pull(penguins, var = bill_length_mm)
+ggplot(penguins, aes(x=bill_length_mm, y=flipper_length_mm)) + geom_point(aes(color = species))
+```
+
+There are 344 rows and 8 columns in the dataset.Including "species", "island", "bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g", "sex", "year" in total 8 variables. the mean of flipper length is 200.9.
+

@@ -9,29 +9,34 @@ Problem 1
 library(tidyverse)
 ```
 
-```{r}
-random_df = rnorm(10)
-logic_vector = random_df > 0
-character_vector = c("1","2","3","1","2","3", "1","2","3","2")
-factor_vector = factor(c("x","y","z","x","y","z", "x","y","z","y"))
-```
 
 ```{r}
-R = mean(random_df)
-L = mean(logic_vector)
-C = mean(character_vector)
-F = mean(factor_vector)
+example_df = 
+  tibble(
+  random_df = rnorm(10),
+  vec_log = random_df > 0,
+  vec_char = c("Ali","Bieber","Seunghub","Hun","J.don","Jungkok", "Hyuna","V","RM","JH"),
+  vec_factor = factor(c("Solo","Solo","N.Fling","N.Flying","N.Flying","BTS", "Solo","BTS","BTS","BTS"))
+  )
+example_df
+```
+
+
+```{r}
+r = pull(example_df, var = random_df)
+l = as.numeric(pull(example_df, var = vec_log))
+c = as.numeric(pull(example_df, var = vec_char))
+f = as.numeric(pull(example_df, var = vec_factor))
+R = mean(q)
+L = mean(l)
+C = mean(c)
+F = mean(f)
 R
 L
 C
 F
 ```
 
-```{r}
-as.numeric(logic_vector)
-as.numeric(character_vector)
-as.numeric(factor_vector)
-```
 
 
 
@@ -52,9 +57,13 @@ n_col = ncol(penguins)
 colnames(penguins)
 b = pull(penguins, var = flipper_length_mm)
 summary(b)
-ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm)) + geom_point(aes(color = species))
 skimr::skim(penguins)
 ```
 
 There are `r n_row` rows and `r n_col` columns in the dataset. Including `r colnames(penguins)` in total 8 variables, and the describtion of them are `r summary(penguins)`. The mean of flipper length is 200.9.
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm)) + geom_point(aes(color = species))
+ggsave("penguins_plot.pdf",height = 4,width = 4)
+```
 

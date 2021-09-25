@@ -53,6 +53,7 @@ colnames(penguins)
 b = pull(penguins, var = flipper_length_mm)
 summary(b)
 ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm)) + geom_point(aes(color = species))
+skimr::skim(penguins)
 ```
 
 There are `r n_row` rows and `r n_col` columns in the dataset. Including `r colnames(penguins)` in total 8 variables, and the describtion of them are `r summary(penguins)`. The mean of flipper length is 200.9.

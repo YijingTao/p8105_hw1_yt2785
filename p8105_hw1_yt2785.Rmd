@@ -85,9 +85,7 @@ b = pull(penguins, var = flipper_length_mm)
 mean_flipper = mean(b,na.rm = TRUE)
 ```
 
-**There are `r n_row` rows and `r n_col` columns in the dataset. **
-**Including `r colnames(penguins)` in total 8 variables. **
-**The mean of flipper length is `r mean_flipper`.**
+**There are `r n_row` rows and `r n_col` columns in the dataset. Including `r colnames(penguins)` in total 8 variables. The mean of flipper length is `r mean_flipper`.**
 
 Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help).
 

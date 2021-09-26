@@ -51,7 +51,7 @@ library(dplyr)
 
 ```{r}
 data("penguins", package = "palmerpenguins")
-summary(penguins)
+summary(penguins,na.rm=TRUE)
 skimr::skim(penguins)
 n_row = nrow(penguins)
 n_col = ncol(penguins)

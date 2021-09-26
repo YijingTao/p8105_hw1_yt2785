@@ -3,31 +3,38 @@ title: "p8105_hw1_yt2785"
 output: github_document
 ---
 
-Problem 1
+**Problem 1**
 
 ```{r}
 library(tidyverse)
 ```
 
+Create a data frame comprised of:
+
+a random sample of size 10 from a standard Normal distribution;
+a logical vector indicating whether elements of the sample are greater than 0;
+a character vector of length 10;
+a factor vector of length 10, with 3 different factor levels;
 
 ```{r}
-example_df = 
+temperature_change_df = 
   tibble(
-  random_df = rnorm(10),
-  vec_log = random_df > 0,
-  vec_char = c("Ali","Bieber","Seunghub","Hun","J.don","Jungkok", "Hyuna","V","RM","JH"),
-  vec_factor = factor(c("Solo","Solo","N.Fling","N.Flying","N.Flying","BTS", "Solo","BTS","BTS","BTS"))
+  change_df = rnorm(10),
+  vec_log = change_df > 0,
+  vec_char = c("Guangzhou","New York","Shandong","Fujian","Ohio","Osaka", "Tokyo","Shanghai","LA","Hokkaido"),
+  vec_factor = factor(c("China","U.S.","China","China","U.S.","Japan", "Japan","China","U.S.","Japan"))
   )
-example_df
+temperature_change_df
 ```
 
+Try to take the mean of each variable in your dataframe. 
 
-```{r}
-r = pull(example_df, var = random_df)
-l = as.numeric(pull(example_df, var = vec_log))
-c = as.numeric(pull(example_df, var = vec_char))
-f = as.numeric(pull(example_df, var = vec_factor))
-R = mean(q)
+```{r warning=FALSE}
+r = pull(temperature_change_df, var = change_df)
+l = pull(temperature_change_df, var = vec_log)
+c = pull(temperature_change_df, var = vec_char)
+f = pull(temperature_change_df, var = vec_factor)
+R = mean(r)
 L = mean(l)
 C = mean(c)
 F = mean(f)
@@ -37,10 +44,23 @@ C
 F
 ```
 
+In some cases, you can explicitly convert variables from one type to another. Write a code chunk that applies the as.numeric function to the logical, character, and factor variables (please show this chunk but not the output). What happens, and why? Does this help explain what happens when you try to take the mean?
+
+```{r warning=FALSE}
+l_num = as.numeric(l)
+c_num = as.numeric(c)
+f_num = as.numeric(f)
+L_num = mean(l_num)
+C_num = mean(c_num)
+F_num = mean(f_num)
+```
 
 
 
-Problem 2
+
+**Problem 2**
+
+load the penguins dataset
 
 ```{r}
 library(palmerpenguins)
@@ -48,21 +68,32 @@ library(ggplot2)
 library(dplyr)
 ```
 
+Write a short description of the penguins dataset (not the penguins_raw dataset) using inline R code, including:
+
+the data in this dataset, including names / values of important variables;
+the size of the dataset (using nrow and ncol);
+the mean flipper length
 
 ```{r}
 data("penguins", package = "palmerpenguins")
-summary(penguins,na.rm=TRUE)
+summary(penguins,na.rm = TRUE)
 skimr::skim(penguins)
 n_row = nrow(penguins)
 n_col = ncol(penguins)
 colnames(penguins)
 b = pull(penguins, var = flipper_length_mm)
-mean_flipper = mean(b,na.rm=TRUE)
+mean_flipper = mean(b,na.rm = TRUE)
 ```
 
-There are `r n_row` rows and `r n_col` columns in the dataset. Including `r colnames(penguins)` in total 8 variables, and the describtion of them are `r summary(penguins)`. The mean of flipper length is `r mean_flipper`.
+**There are `r n_row` rows and `r n_col` columns in the dataset. **
+**Including `r colnames(penguins)` in total 8 variables. **
+**The mean of flipper length is `r mean_flipper`.**
 
-```{r}
+Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help).
+
+Export your first scatterplot to your project directory using ggsave.
+
+```{r warning=FALSE}
 ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm)) + geom_point(aes(color = species))
 ggsave("penguins_plot.pdf",height = 4,width = 4)
 ```

@@ -1,13 +1,19 @@
 ---
 title: "p8105_hw1_yt2785"
+author: Yijing Tao (UNI yt2785)
+date: Sep 2021
 output: github_document
 ---
 
-**Problem 1**
 
-```{r}
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 library(tidyverse)
+library(palmerpenguins)
+library(ggplot2)
 ```
+
+**Problem 1**
 
 Create a data frame comprised of:
 
@@ -16,7 +22,7 @@ a logical vector indicating whether elements of the sample are greater than 0;
 a character vector of length 10;
 a factor vector of length 10, with 3 different factor levels;
 
-```{r}
+```{r paged.print=TRUE}
 temperature_change_df = 
   tibble(
   change_df = rnorm(10),
@@ -29,30 +35,30 @@ temperature_change_df
 
 Try to take the mean of each variable in your dataframe. 
 
-```{r warning=FALSE}
-r = pull(temperature_change_df, var = change_df)
-l = pull(temperature_change_df, var = vec_log)
-c = pull(temperature_change_df, var = vec_char)
-f = pull(temperature_change_df, var = vec_factor)
-R = mean(r)
-L = mean(l)
-C = mean(c)
-F = mean(f)
-R
-L
-C
-F
+```{r message=TRUE, warning=FALSE}
+change = pull(temperature_change_df, var = change_df)
+logic = pull(temperature_change_df, var = vec_log)
+charcter = pull(temperature_change_df, var = vec_char)
+factor = pull(temperature_change_df, var = vec_factor)
+mean_change = mean(change)
+mean_logic = mean(logic)
+mean_charcter = mean(charcter)
+mean_factor = mean(factor)
+mean_change
+mean_logic
+mean_charcter
+mean_factor
 ```
 
 In some cases, you can explicitly convert variables from one type to another. Write a code chunk that applies the as.numeric function to the logical, character, and factor variables (please show this chunk but not the output). What happens, and why? Does this help explain what happens when you try to take the mean?
 
 ```{r warning=FALSE}
-l_num = as.numeric(l)
-c_num = as.numeric(c)
-f_num = as.numeric(f)
-L_num = mean(l_num)
-C_num = mean(c_num)
-F_num = mean(f_num)
+logic_num = as.numeric(logic)
+character_num = as.numeric(character())
+factor_num = as.numeric(factor)
+mean_logic_num = mean(logic_num)
+mean_character_num = mean(character_num)
+mean_factor_num = mean(factor_num)
 ```
 
 
@@ -62,30 +68,37 @@ F_num = mean(f_num)
 
 load the penguins dataset
 
-```{r}
-library(palmerpenguins)
-library(ggplot2)
-library(dplyr)
-```
-
 Write a short description of the penguins dataset (not the penguins_raw dataset) using inline R code, including:
 
 the data in this dataset, including names / values of important variables;
 the size of the dataset (using nrow and ncol);
 the mean flipper length
 
-```{r}
+```{r message=FALSE}
 data("penguins", package = "palmerpenguins")
-summary(penguins,na.rm = TRUE)
-skimr::skim(penguins)
+penguins_sum = summary(penguins,na.rm = TRUE)
+penguins_skim = skimr::skim(penguins)
 n_row = nrow(penguins)
 n_col = ncol(penguins)
-colnames(penguins)
+penguins_colnames = colnames(penguins)
 b = pull(penguins, var = flipper_length_mm)
 mean_flipper = mean(b,na.rm = TRUE)
 ```
 
-**There are `r n_row` rows and `r n_col` columns in the dataset. Including `r colnames(penguins)` in total 8 variables. The mean of flipper length is `r mean_flipper`.**
+**There are `r n_row` rows and `r n_col` columns in the dataset. Including `r penguins_colnames` in total 8 variables. The mean of flipper length is `r mean_flipper`.**
+
+The summary of the penguins dataset
+
+```{r}
+penguins_sum
+```
+
+The skim of the penguins dataset
+
+```{r}
+penguins_skim
+```
+
 
 Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help).
 

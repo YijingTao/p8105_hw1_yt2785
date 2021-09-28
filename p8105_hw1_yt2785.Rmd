@@ -85,7 +85,7 @@ b = pull(penguins, var = flipper_length_mm)
 mean_flipper = mean(b,na.rm = TRUE)
 ```
 
-**There are `r n_row` rows and `r n_col` columns in the dataset. Including `r penguins_colnames` in total 8 variables. The mean of flipper length is `r mean_flipper`. The other important information is in the summary below.**
+**There are `r n_row` rows and `r n_col` columns in the dataset. Including `r penguins_colnames` in total 8 variables. The mean of flipper length is `r mean_flipper`. The other important informations are in the summary below.**
 
 ```{r}
 summary(penguins)

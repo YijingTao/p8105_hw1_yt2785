@@ -38,17 +38,19 @@ Try to take the mean of each variable in your dataframe.
 ```{r message=TRUE, warning=FALSE}
 change = pull(temperature_change_df, var = change_df)
 logic = pull(temperature_change_df, var = vec_log)
-charcter = pull(temperature_change_df, var = vec_char)
+character = pull(temperature_change_df, var = vec_char)
 factor = pull(temperature_change_df, var = vec_factor)
 mean_change = mean(change)
 mean_logic = mean(logic)
-mean_charcter = mean(charcter)
+mean_character = mean(character)
 mean_factor = mean(factor)
 mean_change
 mean_logic
-mean_charcter
+mean_character
 mean_factor
 ```
+
+**The mean of each variable in my dataframe is `r mean_change`, `r mean_logic`, `r mean_character`,`r mean_factor`. the mean of character and factor vector is invalid**
 
 In some cases, you can explicitly convert variables from one type to another. Write a code chunk that applies the as.numeric function to the logical, character, and factor variables (please show this chunk but not the output). What happens, and why? Does this help explain what happens when you try to take the mean?
 
@@ -61,7 +63,7 @@ mean_character_num = mean(character_num)
 mean_factor_num = mean(factor_num)
 ```
 
-
+**The character vector can't be numeric**
 
 
 **Problem 2**
@@ -83,7 +85,12 @@ b = pull(penguins, var = flipper_length_mm)
 mean_flipper = mean(b,na.rm = TRUE)
 ```
 
-**There are `r n_row` rows and `r n_col` columns in the dataset. Including `r penguins_colnames` in total 8 variables. The mean of flipper length is `r mean_flipper`.**
+**There are `r n_row` rows and `r n_col` columns in the dataset. Including `r penguins_colnames` in total 8 variables. The mean of flipper length is `r mean_flipper`. The other important information is in the summary below.**
+
+```{r}
+summary(penguins)
+```
+
 
 Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help).
 
